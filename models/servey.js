@@ -1,0 +1,50 @@
+import mongoose from 'mongoose'
+const ServeySchema = new mongoose.Schema({
+    name:{
+        type:String
+    },
+    email:{
+        type:String
+    },
+    mobile:{
+        type:String
+    },
+    dob:{
+        type:Date
+    },
+    gender:{
+        type:String
+    },
+    social:{
+        type:Object
+    },
+    shoping:{
+        type:Object
+    },
+    country:{
+        type:String
+    },
+    state:{
+        type:String
+    },
+    city:{
+        type:String
+    },
+    food:{
+        type:String
+    },
+    profession:{
+        type:String
+    },
+    colour:{
+        type:String
+    },
+    income_source:{
+        type:String
+    },
+    ip:{
+        type:Object
+    },
+    created_at: { type: Date, default: Date.now },
+})
+export default mongoose.models.servey || mongoose.model('servey',ServeySchema);
