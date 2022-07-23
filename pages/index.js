@@ -78,7 +78,7 @@ export default function Home() {
   const handleSubmit = (e)=>{
     setLoader(true)
     e.preventDefault();
-    axios.post("http://localhost:3000/api/post/servey",formValues)
+    axios.post("/api/post/servey",formValues)
     .then(function (response) {
       console.log(response.data);
     })
