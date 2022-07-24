@@ -39,6 +39,7 @@ export default function Home() {
   const [countryList, setcountryList] = useState([]);
   const [loader, setLoader] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [nameSpace, setNameSpace] = useState(false);
  
   const handleInput = (e)=>{
     setFormValue({...formValues,[e.target.name]:e.target.value});
@@ -98,6 +99,13 @@ export default function Home() {
     
     // e.target.reset();
   }
+  const checkSpace = (e)=>{
+    if(e.target.value.trim().length === 0){
+      setNameSpace(true);
+    }else{
+      setNameSpace(false);
+    }
+  }
   useEffect(()=>{
     fetchCountry();
     getUserCountryAndIP();
@@ -116,7 +124,7 @@ export default function Home() {
             <Box component="form" onSubmit={handleSubmit}>
               <Grid container item={true}>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
-                  <TextField variant='outlined' margin='normal' required fullWidth id='fullname' label='Full Name' name='name' onChange={handleInput} />
+                  <TextField error={nameSpace} variant='outlined' margin='normal' required fullWidth id='fullname' label='Full Name' name='name' onChange={(e)=>{handleInput(e); checkSpace(e); }} />
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <TextField variant='outlined' margin='normal' type="email" required fullWidth id='email' label='Email' name='email' onChange={handleInput} autoComplete='email' />
@@ -169,7 +177,7 @@ export default function Home() {
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <FormControl fullWidth sx={{ mt: 3 }}>
                     <InputLabel id="demo-simple-select-helper-label">Source Of Income</InputLabel>
-                    <Select labelId="demo-simple-select-helper-label" name="income_source" id="demo-simple-select-helper" label="Source Of Income" onChange={handleInput}>
+                    <Select required labelId="demo-simple-select-helper-label" name="income_source" id="demo-simple-select-helper" label="Source Of Income" onChange={handleInput}>
                       <MenuItem value='null'>
                         <em>None</em>
                       </MenuItem>
@@ -184,7 +192,7 @@ export default function Home() {
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <FormControl fullWidth sx={{ mt: 3 }}>
                     <InputLabel id="demo-simple-select-helper-label">Profession</InputLabel>
-                    <Select labelId="demo-simple-select-helper-label" name="profession" id="demo-simple-select-helper" label="profession" onChange={handleInput}>
+                    <Select required labelId="demo-simple-select-helper-label" name="profession" id="demo-simple-select-helper" label="profession" onChange={handleInput}>
                       <MenuItem value='null'>
                         <em>None</em>
                       </MenuItem>
@@ -212,7 +220,7 @@ export default function Home() {
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <FormControl fullWidth sx={{ mt: 3 }}>
                     <InputLabel id="demo-simple-select-helper-label">Country</InputLabel>
-                    <Select labelId="demo-simple-select-helper-label" name="country" id="demo-simple-select-helper" label="Country" onChange={handleCountryChange}>
+                    <Select required labelId="demo-simple-select-helper-label" name="country" id="demo-simple-select-helper" label="Country" onChange={handleCountryChange}>
                       <MenuItem value='null'>
                         <em>None</em>
                       </MenuItem>
