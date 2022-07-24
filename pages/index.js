@@ -119,10 +119,13 @@ export default function Home() {
                   <TextField variant='outlined' margin='normal' required fullWidth id='fullname' label='Full Name' name='name' onChange={handleInput} />
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
-                  <TextField variant='outlined' margin='normal' required fullWidth id='email' label='Email' name='email' onChange={handleInput} autoComplete='email' />
+                  <TextField variant='outlined' margin='normal' type="email" required fullWidth id='email' label='Email' name='email' onChange={handleInput} autoComplete='email' />
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
-                  <TextField inputProps={{ inputMode: 'numeric' }} variant='outlined' margin='normal' required fullWidth id='mobilenumber' label='Mobile Number' name='mobile' onChange={handleInput} />
+                  <TextField  inputProps={{ inputMode: 'numeric',pattern: "[0-9]" }} 
+                  error={formValues.mobile === ""}
+                  helperText={formValues.mobile === "" ? '10 Digits Mobile Number' : ' '}
+                  variant='outlined' margin='normal' required fullWidth id='mobilenumber' label='Mobile Number' name='mobile' onChange={handleInput} />
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <LocalizationProvider dateAdapter={AdapterDateFns} >
