@@ -99,13 +99,6 @@ export default function Home() {
     
     // e.target.reset();
   }
-  const checkSpace = (e)=>{
-    if(e.target.value.trim().length === 0){
-      setNameSpace(true);
-    }else{
-      setNameSpace(false);
-    }
-  }
   useEffect(()=>{
     fetchCountry();
     getUserCountryAndIP();
@@ -124,7 +117,7 @@ export default function Home() {
             <Box component="form" onSubmit={handleSubmit}>
               <Grid container item={true}>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
-                  <TextField error={nameSpace} variant='outlined' margin='normal' required fullWidth id='fullname' label='Full Name' name='name' onChange={(e)=>{handleInput(e); checkSpace(e); }} />
+                  <TextField variant='outlined' margin='normal' required fullWidth id='fullname' label='Full Name' name='name' onChange={handleInput} />
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <TextField variant='outlined' margin='normal' type="email" required fullWidth id='email' label='Email' name='email' onChange={handleInput} autoComplete='email' />
