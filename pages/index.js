@@ -123,7 +123,7 @@ export default function Home() {
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <TextField  inputProps={{ inputMode: 'numeric',pattern: "[0-9]" }} 
-                  error={formValues.mobile === ""}
+                  // error={formValues.mobile === ""}
                   helperText={formValues.mobile === "" ? '10 Digits Mobile Number' : ' '}
                   variant='outlined' margin='normal' required fullWidth id='mobilenumber' label='Mobile Number' name='mobile' onChange={handleInput} />
                 </Grid>
