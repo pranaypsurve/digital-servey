@@ -39,10 +39,24 @@ export default function Home() {
   const [countryList, setcountryList] = useState([]);
   const [loader, setLoader] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [nameSpace, setNameSpace] = useState(false);
+  const [errors, setErrors] = useState({
+    name:false,
+  });
  
   const handleInput = (e)=>{
-    setFormValue({...formValues,[e.target.name]:e.target.value});
+    
+    if(e.target.name === 'name'){
+      if(e.target.value.trim().length === 0){
+        setFormValue({...formValues,[e.target.name]:''});
+        setErrors({...errors,[e.target.name]:true});
+      }else{
+        setErrors({...errors,[e.target.name]:false});
+        setFormValue({...formValues,[e.target.name]:e.target.value});
+      }
+    }else{
+      setFormValue({...formValues,[e.target.name]:e.target.value});
+    }
+    
   };
   const dateHandle = (date)=>{
     setFormValue({...formValues,['dob']:date});
@@ -114,16 +128,16 @@ export default function Home() {
         </Grid>
         <Grid container item={true}>
           <Grid item={true} xs={12} sm={12} md={12} >
-            <Box component="form" novalidate onSubmit={handleSubmit} >
+            <Box component="form" onSubmit={handleSubmit} >
               <Grid container item={true}>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
-                  <TextField required variant='outlined' margin='normal' fullWidth id='fullname' label='Full Name' name='name' onChange={handleInput} />
+                  <TextField inputProps={{ minLength: 3}} required variant='outlined' margin='normal' fullWidth id='fullname' label='Full Name' name='name' error={errors.name} autoComplete='off' value={formValues.name} onChange={handleInput} />
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
-                  <TextField required variant='outlined' margin='normal' type="email" fullWidth id='email' label='Email' name='email' onChange={handleInput} autoComplete='email' />
+                  <TextField inputProps={{ minLength: 5}} required variant='outlined' margin='normal' type="email" fullWidth id='email' label='Email' name='email' onChange={handleInput} autoComplete='email' />
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
-                  <TextField  inputProps={{ inputMode: 'numeric' }} 
+                  <TextField  inputProps={{ inputMode: 'numeric',minLength: 10 }} 
                   // error={formValues.mobile === ""}
                   helperText={formValues.mobile === "" ? '10 Digits Mobile Number' : ' '}
                   variant='outlined' margin='normal' required fullWidth id='mobilenumber' label='Mobile Number' name='mobile' onChange={handleInput} />
@@ -170,7 +184,7 @@ export default function Home() {
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <FormControl fullWidth sx={{ mt: 3 }}>
                     <InputLabel id="demo-simple-select-helper-label">Source Of Income</InputLabel>
-                    <Select required labelId="demo-simple-select-helper-label" name="income_source" id="demo-simple-select-helper" label="Source Of Income" onChange={handleInput}>
+                    <Select required defaultValue='' labelId="demo-simple-select-helper-label" name="income_source" id="demo-simple-select-helper" label="Source Of Income" onChange={handleInput}>
                       <MenuItem value='null'>
                         <em>None</em>
                       </MenuItem>
@@ -185,10 +199,8 @@ export default function Home() {
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <FormControl fullWidth sx={{ mt: 3 }}>
                     <InputLabel id="demo-simple-select-helper-label">Profession</InputLabel>
-                    <Select required labelId="demo-simple-select-helper-label" name="profession" id="demo-simple-select-helper" label="profession" onChange={handleInput}>
-                      <MenuItem value='null'>
-                        <em>None</em>
-                      </MenuItem>
+                    <Select required defaultValue='' labelId="demo-simple-select-helper-label" name="profession" id="demo-simple-select-helper" label="profession" onChange={handleInput}>
+                      <MenuItem value='null'>None</MenuItem>
                       <MenuItem value='accountant'>Accountant</MenuItem>
                       <MenuItem value='consultant'>Consultant</MenuItem>
                       <MenuItem value='electrician'>Electrician</MenuItem>
@@ -213,7 +225,7 @@ export default function Home() {
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <FormControl fullWidth sx={{ mt: 3 }}>
                     <InputLabel id="demo-simple-select-helper-label">Country</InputLabel>
-                    <Select required labelId="demo-simple-select-helper-label" name="country" id="demo-simple-select-helper" label="Country" onChange={handleCountryChange}>
+                    <Select required defaultValue='' labelId="demo-simple-select-helper-label" name="country" id="demo-simple-select-helper" label="Country" onChange={handleCountryChange}>
                       <MenuItem value='null'>
                         <em>None</em>
                       </MenuItem>
