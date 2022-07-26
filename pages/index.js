@@ -117,10 +117,10 @@ export default function Home() {
             <Box component="form" novalidate onSubmit={handleSubmit} >
               <Grid container item={true}>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
-                  <TextField variant='outlined' margin='normal' required fullWidth id='fullname' label='Full Name' name='name' onChange={handleInput} />
+                  <TextField required variant='outlined' margin='normal' fullWidth id='fullname' label='Full Name' name='name' onChange={handleInput} />
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
-                  <TextField variant='outlined' margin='normal' type="email" fullWidth id='email' label='Email' name='email' onChange={handleInput} autoComplete='email' required />
+                  <TextField required variant='outlined' margin='normal' type="email" fullWidth id='email' label='Email' name='email' onChange={handleInput} autoComplete='email' />
                 </Grid>
                 <Grid item={true} xs={12} sm={12} md={6} px={1}>
                   <TextField  inputProps={{ inputMode: 'numeric' }} 
